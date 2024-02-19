@@ -57,7 +57,7 @@ It's good to use Service Account for the operations. To create the Service Accou
 ## Network Foundation
 As stated in the challange, we need a VPC, a private and public subnet. Set up an Internet Gateway for public subnet access and NAT Gateways for private subnet access.
 
-I created a VPC with:
+#### I created a VPC with:
  - 1 public subnet:
     - For internet access to Public Subnet, I used Firewall with HTTP and HTTPS traffic allowed.
    https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/bd583804afb0497b8bacc9e044b80cda62873a56/project.tfvars#L19-L27
@@ -65,11 +65,14 @@ I created a VPC with:
  - 1 private subnet:
     - NAT Gateway for the private subnet, I used compute_router and compute_router_nat
       https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/bd583804afb0497b8bacc9e044b80cda62873a56/project.tfvars#L29-L62
+      
+<img width="1128" alt="Screenshot 2024-02-18 at 9 48 48 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/2436bbb9-1c8a-459b-9d80-f236afdedf3c">
+
 
 ## Security Measures
 As stated in the challange, Use IAM roles for secure CLOUD service interactions without hard-coded credentials.
 
-I used IAM Policies to give the necessary permission for the service account:
+#### I used IAM Policies to give the necessary permission for the service account:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/project-management-terraform/aim_roles.tf#L1-L32
    - See the tfvars details:
      https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/project-management-terraform/project.tfvars#L19-L36
@@ -77,38 +80,60 @@ I used IAM Policies to give the necessary permission for the service account:
 ## Web Tier Configuration
 As stated in the challange: Deploy web servers within an auto-scaling group, ensuring they can handle load spikes and failures gracefully.- Utilize an Application Load Balancer to distribute traffic evenly across your instances.
 
-I used instance templates for a commong instance type:
+#### I used instance templates for a commong instance type:
 - Template's NIC resides in the Private Subnet
   - See the module values:
     https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/project.tfvars#L80-L100
+    <img width="1223" alt="Screenshot 2024-02-18 at 9 50 11 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/6e97990f-56ef-46f0-a600-49b1c3e98884">
 
-I used compute_health_check resource to check the instance health:
+
+#### I used compute_health_check resource to check the instance health:
 - See the module values:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/project.tfvars#L102-L113
 
-I used compute_instance_group_manager to create and manage pools of Compute Engines
+#### I used compute_instance_group_manager to create and manage pools of Compute Engines
 - See the module:
    https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L50-L60
+  <img width="1213" alt="Screenshot 2024-02-18 at 9 51 10 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/105f671f-f294-4155-af4a-8739837da535">
 
-I used compute_backend_service to use as a backend of the Application Load Balancer
+
+#### I used compute_backend_service to use as a backend of the Application Load Balancer
 - See the module:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L62-L76
+  <img width="877" alt="Screenshot 2024-02-18 at 9 52 11 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/e8b988c9-516f-410c-8f0c-c91ef70a4ec8">
 
-I used compute_url_map which is a URL Map Load Application Balancer
+
+#### I used compute_url_map which is a URL Map Load Application Balancer
 - See the module:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L97-L104
+  <img width="797" alt="Screenshot 2024-02-18 at 9 53 08 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/cb5ba7ab-e9a7-4895-af7c-2e1318d12c0c">
 
-I used compute_target_http_proxy Represents a TargetHttpProxy resource, which is used by one or more global forwarding rule to route incoming HTTP requests to a URL map.
+
+#### I used compute_target_http_proxy Represents a TargetHttpProxy resource, which is used by one or more global forwarding rule to route incoming HTTP requests to a URL map.
 - See the module:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L106-L113
+  <img width="384" alt="Screenshot 2024-02-18 at 9 54 16 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/1df82616-f82e-42d5-a252-593508e583a5">
 
-I used compute_global_forwarding_rule : takes a name, the target HTTP proxy, and the range of port numbers this rule will serve for TCP.
+
+#### I used compute_global_forwarding_rule : takes a name, the target HTTP proxy, and the range of port numbers this rule will serve for TCP.
 - See the module:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L115-L123
+  <img width="310" alt="Screenshot 2024-02-18 at 9 53 50 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/12dd89fe-f369-40b3-95a8-eede3c708734">
+
+
+## Database Deployment:
+As stated in the challange: Provision a managed database in a private subnet, accessible only by your application servers.
+
+#### I used sql_database_instance for managed PostgreSQL 15 type.
+- See the module:
+  https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/75ec34b02bcc472233613caaa7978ae7eea4e1ee/database.tf#L1-L18
+  <img width="1273" alt="Screenshot 2024-02-18 at 9 54 46 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/02167566-29ed-4be5-8cd2-5dce69ef1688">
+
 
 ## Implement Auto-Scaling
-As stated in the challange:Configure auto-scaling policies based on metrics (CPU, memory) to scale your web server fleet up or down automatically.
+As stated in the challange: Configure auto-scaling policies based on metrics (CPU, memory) to scale your web server fleet up or down automatically.
 
-I used compute_instance_autoscaler to auto-scale the instances based on the thresholds
+#### I used compute_instance_autoscaler to auto-scale the instances based on the thresholds
 - See the module:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L78-L95
+<img width="1435" alt="Screenshot 2024-02-18 at 9 46 04 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/54352aae-c4f7-4929-bdfa-3fdcbd84c54d">
