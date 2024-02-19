@@ -136,7 +136,8 @@ As stated in the challange: Configure auto-scaling policies based on metrics (CP
 #### I used compute_instance_autoscaler to auto-scale the instances based on the thresholds
 - See the module:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L78-L95
-<img width="1435" alt="Screenshot 2024-02-18 at 9 46 04 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/54352aae-c4f7-4929-bdfa-3fdcbd84c54d">
+![Screenshot 2024-02-19 at 8 47 48 AM](https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/a417f4cd-507f-4a1d-b049-09b06e3c71b0)
+
 
 # Project Process and Reflection
 
