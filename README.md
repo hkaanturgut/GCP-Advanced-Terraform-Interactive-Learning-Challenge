@@ -137,3 +137,37 @@ As stated in the challange: Configure auto-scaling policies based on metrics (CP
 - See the module:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/4b3b7eb47b40799abb5de6e6200bca36aaa55cdd/compute.tf#L78-L95
 <img width="1435" alt="Screenshot 2024-02-18 at 9 46 04 PM" src="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/54352aae-c4f7-4929-bdfa-3fdcbd84c54d">
+
+# Project Process and Reflection
+
+### Understanding the Requirements and Resource Planning
+The journey began with a deep dive into understanding the specific requirements of deploying a secure and scalable web application on Google Cloud Platform (GCP). Although I was familiar with GCP, identifying the precise resources and their components necessary for this project posed an initial challenge. This step was crucial to ensure that the architecture would not only meet the challenge's objectives but also adhere to best practices in cloud infrastructure.
+
+### Terraform Resource Code Exploration and Module Development
+The next step involved an exhaustive exploration of Terraform's documentation for the required resources. Understanding how each resource needed to be configured and how they interconnect within the cloud environment was both time-consuming and enlightening. This phase was particularly intensive as I decided to write Terraform modules from scratch. The goal here was not just to meet the challenge's immediate needs but to create reusable components that could simplify future infrastructure as code (IaC) projects. Although this approach demanded a significant investment of time, the outcome was a set of modular, flexible, and reusable Terraform modules that could serve as a foundation for various cloud architectures.
+
+### Infrastructure Diagram Creation
+Visualizing the architecture was another critical step in the process. Creating an infrastructure diagram took time but was essential for several reasons: it facilitated a better understanding of the overall architecture, helped in identifying potential issues or improvements, and provided a clear reference for both current and future project stakeholders. This diagram serves as a map, guiding the viewer through the complex interconnections of cloud resources that make up the secure and scalable web application.
+
+# Challenges Encountered
+
+### Accidental Deletion of IAM Policies
+One of the most significant challenges I encountered was inadvertently locking myself out of the project by deleting the google_project_iam_policy resource. This mistake was particularly frustrating and time-consuming, leading to a substantial setback. 
+
+I was like:
+
+![giphy (2)](https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/e08dc506-c462-4854-9400-625856f75df1)
+
+The issue stemmed from following guidance on <a href="https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam#google_project_iam_policy" target="_blank">HashiCorp's Terraform Registry</a>, which, while helpful, resulted in an unexpected complication. To resolve this, I had to start from scratch by creating a new project and meticulously reconfiguring IAM policies in alignment with HashiCorp's recommendations. This experience underscored the importance of careful resource management and the potential pitfalls of managing IAM policies through Terraform.
+
+
+### Enabling GCP Resource APIs
+Another challenge specific to GCP was the requirement to enable APIs for each resource before it could be managed through Terraform. This step is distinct from my experiences with Azure and AWS, where resource APIs are generally enabled by default or managed differently. Adapting to GCP's approach required a shift in mindset and an appreciation for the platform's unique operational model. Despite the initial learning curve, this aspect of GCP's infrastructure management ultimately added a valuable perspective to my cloud engineering skillset.
+
+# Reflections
+This project was not just about meeting the challenge's technical requirements; it was a journey of growth, learning, and adaptation. The process of building from the ground up, facing and overcoming obstacles, and reflecting on these experiences has deepened my understanding of GCP infrastructure and Terraform's capabilities.
+
+## Thanks for reading!
+
+![giphy](https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/assets/113396342/58ed984e-c089-45e3-8030-97b98a6ead70)
+
