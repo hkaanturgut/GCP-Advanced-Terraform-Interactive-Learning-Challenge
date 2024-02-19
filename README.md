@@ -26,7 +26,7 @@ This challenge is not just about deploying infrastructure; it's about mastering 
 
 ### Note: I utilized MODULE approach which is best practice to follow reuseable, more secure and compliant code base. Please see the values for the modules in the .tfvars file.
 
-## Deployment Guide
+## Project/Terraform Configuration Guide
 
 ### Project Creation: 
 You can either create your project from GCP UI or with the following Terraform code:
@@ -52,3 +52,16 @@ It's good to use Service Account for the operations. To create the Service Accou
 - Once the previous steps are done, you can configure your provider.tf as the following :  <a href="https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/main/provider.tf" target="_blank">provider.tf</a>
 - Make sure you give the right path for your credentials file in this code snippet:
   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/ac4db429020ded18577ea7e45fc53fdff3402c91/provider.tf#L18-L19
+#### Note: Google-beta provider si needed for couple resources in the project.
+
+## Networking Overview
+As stated in the challange, we need a VPC, a private and public subnet. Set up an Internet Gateway for public subnet access and NAT Gateways for private subnet access.
+
+I created a VPC with:
+ - 1 public subnet:
+    - For internet access to Public Subnet, I used Firewall with HTTP and HTTPS traffic allowed.
+   https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/bd583804afb0497b8bacc9e044b80cda62873a56/project.tfvars#L19-L27
+
+ - 1 private subnet:
+    - NAT Gateway for the private subnet, I used compute_router and compute_router_nat
+      https://github.com/hkaanturgut/GCP-Advanced-Terraform-Interactive-Learning-Challenge/blob/bd583804afb0497b8bacc9e044b80cda62873a56/project.tfvars#L29-L62
